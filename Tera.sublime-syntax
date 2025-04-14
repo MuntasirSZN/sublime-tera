@@ -7,85 +7,94 @@ scope: source.tera
 hidden: false
 
 variables:
-  tera_open_tag: '{[{%#]-?'
-  tera_close_tag: '-?[}%#]}'
-  identifier: '{{identifier_without_dot}}(?:\.{{identifier_without_dot}})*'
-  identifier_without_dot: '[a-zA-Z_][a-zA-Z0-9_]*'
+  identifier: '[a-zA-Z_][a-zA-Z0-9_]*'
 
 contexts:
   main:
-    - include: tera_blocks
-    - match: ''
-      push: base_language
-
-  # Tera template blocks
-  tera_blocks:
+    # Comments first
     - match: '{#-?'
       captures:
-        0: punctuation.definition.comment.tera
+        0: punctuation.definition.comment.begin.tera
       push:
         - meta_scope: comment.block.tera
         - match: '-?#}'
           captures:
-            0: punctuation.definition.comment.tera
+            0: punctuation.definition.comment.end.tera
           pop: true
+    
+    # Expression tags {{ ... }}
     - match: '({{)-?'
       captures:
-        1: punctuation.definition.tera
+        0: punctuation.definition.template.begin.tera
       push:
-        - meta_scope: meta.scope.tera.expression
+        - meta_scope: meta.template.expression.tera
         - match: '-?(}})'
           captures:
-            1: punctuation.definition.tera
+            0: punctuation.definition.template.end.tera
           pop: true
-        - include: variable_properties
         - include: expression
+    
+    # Statement tags {% ... %}
     - match: '({%)-?\s*(if|elif|for|filter|macro|set|set_global|include|import|extends)\s+'
       captures:
-        1: punctuation.definition.tera
+        0: punctuation.definition.template.begin.tera
+        1: punctuation.definition.template.begin.tera
         2: keyword.control.tera
       push:
-        - meta_scope: meta.scope.tera.tag
+        - meta_scope: meta.template.statement.tera
         - match: '-?(%})'
           captures:
-            1: punctuation.definition.tera
+            0: punctuation.definition.template.end.tera
           pop: true
-        - include: variable_properties
         - include: expression
+    
+    # Block tags {% block ... %}
     - match: '({%)-?\s*(block|endblock|filter|endfilter|endmacro)\s+'
       captures:
-        1: punctuation.definition.tera
+        0: punctuation.definition.template.begin.tera
+        1: punctuation.definition.template.begin.tera
         2: keyword.control.tera
       push:
-        - meta_scope: meta.scope.tera.tag
+        - meta_scope: meta.template.block.tera
         - match: '-?(%})'
           captures:
-            1: punctuation.definition.tera
+            0: punctuation.definition.template.end.tera
           pop: true
-        - include: identifier
+        - include: expression
+    
+    # Control tags {% else, endif, etc %}
     - match: '({%)-?\s*(else|elif|endif|endfor|continue|break|endblock|endfilter|endmacro)\s*'
       captures:
-        1: punctuation.definition.tera
+        0: punctuation.definition.template.begin.tera
+        1: punctuation.definition.template.begin.tera
         2: keyword.control.tera
       push:
-        - meta_scope: meta.scope.tera.tag
+        - meta_scope: meta.template.control.tera
         - match: '-?(%})'
           captures:
-            1: punctuation.definition.tera
+            0: punctuation.definition.template.end.tera
           pop: true
+    
+    # Raw content tags
     - match: '({%)-?\s*(raw)\s*(%})'
       captures:
-        1: punctuation.definition.tera
+        0: punctuation.definition.template.begin.tera
+        1: punctuation.definition.template.begin.tera
         2: keyword.control.tera
-        3: punctuation.definition.tera
+        3: punctuation.definition.template.end.tera
       push:
-        - meta_scope: comment.block.tera.raw
+        - meta_scope: meta.template.raw.tera
         - match: '({%)-?\s*(endraw)\s*(%})'
           captures:
-            1: punctuation.definition.tera
+            0: punctuation.definition.template.end.tera
+            1: punctuation.definition.template.begin.tera
             2: keyword.control.tera
-            3: punctuation.definition.tera
+            3: punctuation.definition.template.end.tera
           pop: true
+    
+    # Default to base language (typically HTML) for non-Tera content
+    - match: ''
+      push: base_language
 
   # Special context to highlight variable properties like .hex
   variable_properties:
@@ -95,32 +104,89 @@ contexts:
         2: entity.name.property.tera
 
   identifier:
-    - match: '\b([a-zA-Z_][a-zA-Z0-9_]+)\b'
+    - match: '\b{{identifier}}\b'
       scope: variable.other.tera
+
+  expression:
+    # Variables and identifiers
+    - include: variable_properties
+    - include: identifier
+    
+    # Literals
+    - include: string
+    - include: number
+    - include: boolean
+    
+    # Operators
+    - match: '(\+|\-|\*|/|%|~)'
+      scope: keyword.operator.arithmetic.tera
+    - match: '(==|>=|<=|<|>|!=)'
+      scope: keyword.operator.comparison.tera
+    - match: '='
+      scope: keyword.operator.assignment.tera
+    - match: '\b(in|and|or|not|is|as)\b'
+      scope: keyword.operator.logical.tera
+    
+    # Tests and filters
+    - include: test
+    - include: filter
+    
+    # Function calls
+    - include: function
+    
+    # Special variables
+    - match: '\b(loop|__tera_context)\b'
+      scope: variable.language.tera
+    
+    # Brackets and grouping
+    - match: '\['
+      captures:
+        0: punctuation.definition.brackets.begin.tera
+      push:
+        - meta_scope: meta.brackets.tera
+        - match: '\]'
+          captures:
+            0: punctuation.definition.brackets.end.tera
+          pop: true
+        - include: expression
+    - match: '\('
+      captures:
+        0: punctuation.definition.group.begin.tera
+      push:
+        - meta_scope: meta.group.tera
+        - match: '\)'
+          captures:
+            0: punctuation.definition.group.end.tera
+          pop: true
+        - include: expression
+    
+    # Other punctuation
+    - match: '(\.|,|::)'
+      scope: punctuation.separator.tera
 
   test:
     - match: '\s*\b(is)\s+(not\s+)?(\w+)\b'
       captures:
-        1: keyword.control.tera
-        2: keyword.control.tera
-        3: entity.name.function.tera
+        1: keyword.operator.test.tera
+        2: keyword.operator.logical.tera
+        3: support.function.test.tera
 
   filter:
-    - match: '(\|)\s*\b(\w+)\b\('
+    - match: '(\|)\s*\b([a-zA-Z_][a-zA-Z0-9_]*)\b\('
       captures:
-        1: keyword.operator.tera
-        2: entity.name.function.tera
+        1: keyword.operator.filter.tera
+        2: support.function.filter.tera
       push:
         - match: '\)'
           pop: true
         - include: arguments
-    - match: '(\|)\s*\b(\w+)\b'
+    - match: '(\|)\s*\b([a-zA-Z_][a-zA-Z0-9_]*)\b'
       captures:
-        1: keyword.operator.tera
-        2: entity.name.function.tera
+        1: keyword.operator.filter.tera
+        2: support.function.filter.tera
 
   function:
-    - match: '\b(\w*::)?(\w+)\s*\('
+    - match: '\b([a-zA-Z_][a-zA-Z0-9_]*::)?([a-zA-Z_][a-zA-Z0-9_]*)\s*\('
       captures:
         1: entity.name.namespace.tera
         2: entity.name.function.tera
@@ -130,92 +196,44 @@ contexts:
         - include: arguments
 
   boolean:
-    - match: '\b[Tt]rue|[Ff]alse\b'
+    - match: '\b(true|false)\b'
       scope: constant.language.boolean.tera
 
   number:
-    - match: '[+-]?[0-9]+(\.[0-9]+)?'
+    - match: '\b[0-9]+(\.[0-9]+)?\b'
       scope: constant.numeric.tera
 
-  expression:
-    - include: test
-    - match: '(\+|\-|\*|/|%|~)'
-      scope: keyword.operator.arithmetic.tera
-    - include: filter
-    - match: '\b(loop|__tera_context)\b'
-      scope: variable.language.tera
-    - include: function
-    - include: variable_properties
-    - match: '\['
-      captures:
-        0: punctuation.other.tera
-      push:
-        - match: '\]'
-          captures:
-            0: punctuation.other.tera
-          pop: true
-        - include: expression
-    - match: '\('
-      captures:
-        0: punctuation.other.tera
-      push:
-        - match: '\)'
-          captures:
-            0: punctuation.other.tera
-          pop: true
-        - include: expression
-    - match: '(\.|,|::)'
-      scope: punctuation.other.tera
-    - match: '(==|>=|<=|<|>|!=)'
-      scope: keyword.operator.comparison.tera
-    - match: '='
-      scope: keyword.operator.assignment.tera
-    - match: '\b(in|and|or|not|is|as)\b'
-      scope: keyword.operator.logical.tera
-    - include: number
-    - include: boolean
-    - include: identifier
+  string:
     - match: '"'
       captures:
         0: punctuation.definition.string.begin.tera
       push:
         - meta_scope: string.quoted.double.tera
-        - match: '"'
+        - match: '"|$'
           captures:
             0: punctuation.definition.string.end.tera
           pop: true
-        - include: string
+        - match: '\\'
+          scope: constant.character.escape.tera
     - match: "'"
       captures:
         0: punctuation.definition.string.begin.tera
       push:
         - meta_scope: string.quoted.single.tera
-        - match: "'"
+        - match: "'|$"
           captures:
             0: punctuation.definition.string.end.tera
           pop: true
-        - include: string
-    - match: '`'
-      captures:
-        0: punctuation.definition.string.begin.tera
-      push:
-        - meta_scope: string.quoted.other.tera
-        - match: '`'
-          captures:
-            0: punctuation.definition.string.end.tera
-          pop: true
-        - include: string
+        - match: '\\'
+          scope: constant.character.escape.tera
 
   arguments:
-    - match: '\b(\w+)\s*=\s*'
+    - match: '\b([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*'
       captures:
         1: variable.parameter.tera
     - include: expression
 
-  string:
-    - match: '\\.'
-      scope: constant.character.escape.tera
-
-  # Base language - this is a placeholder that will be replaced dynamically
+  # This context is a placeholder and will be replaced by the base language by the plugin
   base_language:
-    - include: scope:text.html.basic
+    - match: ''
+      scope: text.html.basic
