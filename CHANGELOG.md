@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.2](https://github.com/MuntasirSZN/sublime-tera/compare/v1.2.1...v1.2.2) (2025-04-14)
+
+
+### Bug Fixes
+
+* **ci:** use fetch depth 0 ([2a8fa3f](https://github.com/MuntasirSZN/sublime-tera/commit/2a8fa3f272b9941d4c7e96bbe6e0e4a9d839dca7))
+* **syntax:** only highlighting comments ([88c632f](https://github.com/MuntasirSZN/sublime-tera/commit/88c632fc424677e63a1684b5baed6298949048c6))
+
 ## [1.2.1](https://github.com/MuntasirSZN/sublime-tera/compare/v1.2.0...v1.2.1) (2025-04-14)
 
 
