@@ -1,0 +1,45 @@
+// SYNTAX TEST "Packages/SublimeTera/Tera.sublime-syntax"
+
+{# This is a comment #}
+// <- punctuation.definition.comment.tera
+//                  ^ punctuation.definition.comment.tera
+
+{{ variable }}
+// <- punctuation.definition.tera
+//          ^ punctuation.definition.tera
+//  ^ variable.other.tera
+
+{{ object.property }}
+//       ^ punctuation.accessor.tera
+//        ^ entity.name.property.tera
+
+{% if condition %}
+// <- punctuation.definition.tera
+// ^ keyword.control.tera
+
+{% for item in items %}
+// ^ keyword.control.tera
+//          ^ keyword.operator.logical.tera
+
+{{ 123 + 456 }}
+//  ^ constant.numeric.tera
+//      ^ keyword.operator.arithmetic.tera
+//        ^ constant.numeric.tera
+
+{{ true and false }}
+//  ^ constant.language.boolean.tera
+//       ^ keyword.operator.logical.tera
+//           ^ constant.language.boolean.tera
+
+{{ "string" }}
+//  ^ string.quoted.double.tera
+
+{% raw %}
+Raw content here
+{{ not parsed }}
+{% endraw %}
+// ^ keyword.control.tera
+
+{{ value | filter }}
+//       ^ keyword.operator.tera
+//         ^ entity.name.function.tera
