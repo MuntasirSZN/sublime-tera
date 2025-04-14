@@ -52,3 +52,7 @@ If no base extension is detected, HTML highlighting is used as the default.
 ## License
 
 MIT License
+
+## Thanks To
+
+@uncenter for [vscode-tera](https://github.com/uncenter/vscode-tera). This repo is a port of vscode's tmLanguage.
