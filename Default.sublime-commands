@@ -1,0 +1,18 @@
+[
+    {
+        "caption": "Tera: Toggle Debug Mode",
+        "command": "tera_toggle_debug_mode"
+    },
+    {
+        "caption": "Tera: Clear Syntax Cache", 
+        "command": "tera_clear_syntax_cache"
+    },
+    {
+        "caption": "Tera: Reload Syntax",
+        "command": "tera_reload_syntax"
+    },
+    {
+        "caption": "Tera: Set as Tera Template",
+        "command": "tera_set_syntax"
+    }
+]

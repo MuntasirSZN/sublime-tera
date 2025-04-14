@@ -8,13 +8,13 @@
                 "id": "package-settings",
                 "children": [
                     {
-                        "caption": "Tera Syntax",
+                        "caption": "Tera",
                         "children": [
                             {
                                 "caption": "README",
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/SublimeTera/README.md"
+                                    "file": "${packages}/sublime-tera/README.md"
                                 }
                             },
                             { "caption": "-" },
