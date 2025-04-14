@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/MuntasirSZN/sublime-tera/compare/v1.2.2...v2.0.0) (2025-04-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove complexity and focus on syntax only
+
+### breaking
+
+* remove complexity and focus on syntax only ([100369a](https://github.com/MuntasirSZN/sublime-tera/commit/100369ae0b5d740dacabf181ecfab218a5b6cc3e))
+
 ## [1.2.2](https://github.com/MuntasirSZN/sublime-tera/compare/v1.2.1...v1.2.2) (2025-04-14)
 
 
