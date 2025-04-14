@@ -36,3 +36,7 @@ Files with `.tera` extension will automatically use this syntax.
 ## License
 
 MIT License
+
+## Thanks To
+
+@uncenter for [vscode-tera](https://github.com/uncenter/vscode-tera). This repo is a port of vscode's tmLanguage.
