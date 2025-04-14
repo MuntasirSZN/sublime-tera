@@ -1,45 +1,52 @@
-// SYNTAX TEST "Packages/SublimeTera/Tera.sublime-syntax"
+// SYNTAX TEST "Packages/TeraSyntax/Tera.sublime-syntax"
 
-{# This is a comment #}
-// <- punctuation.definition.comment.tera
-//                  ^ punctuation.definition.comment.tera
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tera Test</title>
+</head>
+<body>
+    {# This is a comment #}
+//  ^^ punctuation.definition.comment.tera
+//                    ^^ punctuation.definition.comment.tera
 
-{{ variable }}
-// <- punctuation.definition.tera
-//          ^ punctuation.definition.tera
-//  ^ variable.other.tera
+    {{ variable }}
+//  ^^ punctuation.definition.tera
+//            ^^ punctuation.definition.tera
+//     ^^^^^^^^ variable.other.tera
 
-{{ object.property }}
-//       ^ punctuation.accessor.tera
-//        ^ entity.name.property.tera
+    {{ object.property }}
+//          ^ punctuation.accessor.tera
+//           ^^^^^^^^ entity.name.property.tera
 
-{% if condition %}
-// <- punctuation.definition.tera
-// ^ keyword.control.tera
+    {% if condition %}
+//  ^^ punctuation.definition.tera
+//     ^^ keyword.control.tera
 
-{% for item in items %}
-// ^ keyword.control.tera
-//          ^ keyword.operator.logical.tera
+    {% for item in items %}
+//     ^^^ keyword.control.tera
+//             ^^ keyword.operator.logical.tera
 
-{{ 123 + 456 }}
-//  ^ constant.numeric.tera
-//      ^ keyword.operator.arithmetic.tera
-//        ^ constant.numeric.tera
+    {% raw %}
+    This content won't be parsed
+    {{ not.parsed }}
+    {% endraw %}
 
-{{ true and false }}
-//  ^ constant.language.boolean.tera
-//       ^ keyword.operator.logical.tera
-//           ^ constant.language.boolean.tera
+    {{ 123 + 456 }}
+//     ^^^ constant.numeric.tera
+//         ^ keyword.operator.arithmetic.tera
+//           ^^^ constant.numeric.tera
 
-{{ "string" }}
-//  ^ string.quoted.double.tera
+    {{ true and false }}
+//     ^^^^ constant.language.boolean.tera
+//          ^^^ keyword.operator.logical.tera
+//              ^^^^^ constant.language.boolean.tera
 
-{% raw %}
-Raw content here
-{{ not parsed }}
-{% endraw %}
-// ^ keyword.control.tera
+    {{ "string" }}
+//     ^^^^^^^^ string.quoted.double.tera
 
-{{ value | filter }}
-//       ^ keyword.operator.tera
-//         ^ entity.name.function.tera
+    {{ value | filter }}
+//           ^ keyword.operator.tera
+//             ^^^^^^ entity.name.function.tera
+</body>
+</html>
