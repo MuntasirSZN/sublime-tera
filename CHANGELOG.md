@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/MuntasirSZN/sublime-tera/compare/v1.2.0...v1.2.1) (2025-04-14)
+
+
+### Bug Fixes
+
+* **ci:** checkout the ref ([37e34a6](https://github.com/MuntasirSZN/sublime-tera/commit/37e34a6b00df109aeb8e6f318d534c75af7e44c3))
+
 ## [1.2.0](https://github.com/MuntasirSZN/sublime-tera/compare/v1.1.0...v1.2.0) (2025-04-14)
 
 
