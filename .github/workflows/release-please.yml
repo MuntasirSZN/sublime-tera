@@ -25,6 +25,9 @@ jobs:
       - uses: actions/setup-node@v4
         if: ${{ steps.release.outputs.release_created }}
         with:
-          node-version: 20
+          registry-url: https://registry.npmjs.org/
+          node-version: lts/*
       - if: ${{ steps.release.outputs.release_created }}
         run: npx changelogithub
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
