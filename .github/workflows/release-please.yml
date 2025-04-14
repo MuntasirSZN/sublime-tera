@@ -24,6 +24,7 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
         with:
           ref: ${{ steps.release.outputs.tag_name }}
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         if: ${{ steps.release.outputs.release_created }}
         with:
