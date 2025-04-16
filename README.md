@@ -1,6 +1,6 @@
-# Tera Syntax for Sublime Text
+# Tera Plugin for Sublime Text
 
-A simple syntax highlighting package for Tera templates in Sublime Text.
+A package for Tera templates in Sublime Text.
 
 ## Features
 
