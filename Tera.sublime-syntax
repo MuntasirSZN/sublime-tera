@@ -168,7 +168,7 @@ contexts:
     - match: '='
       scope: keyword.operator.assignment.tera
     - match: '\b(in|and|or|not|is|as)\b'
-      scope: keyword.operator.logical.tera
+      scope: keyword.operator.word.tera
     
     - include: number
     - include: boolean
