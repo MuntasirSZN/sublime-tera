@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/MuntasirSZN/sublime-tera/compare/v2.1.0...v2.1.1) (2025-04-16)
+
+
+### Bug Fixes
+
+* don't capture :: with namespace identifier ([3ff1e83](https://github.com/MuntasirSZN/sublime-tera/commit/3ff1e83cb25e6ece9dd1f61bd768459ce3c8e264))
+
 ## [2.1.0](https://github.com/MuntasirSZN/sublime-tera-syntax/compare/v2.0.0...v2.1.0) (2025-04-16)
 
 
