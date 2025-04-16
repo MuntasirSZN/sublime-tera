@@ -4,11 +4,10 @@
 name: Tera
 file_extensions:
   - tera
-scope: text.html.tera
+scope: text.tera
 
 contexts:
   main:
-    # Tera comments
     - match: '{#-?'
       captures:
         0: punctuation.definition.comment.tera
