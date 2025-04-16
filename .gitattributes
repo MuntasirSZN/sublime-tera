@@ -1,0 +1,3 @@
+syntax_test_tera.tera export-ignore
+
+.github/workflows/** export-ignore
