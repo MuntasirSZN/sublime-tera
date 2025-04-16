@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/MuntasirSZN/sublime-tera-syntax/compare/v2.0.0...v2.1.0) (2025-04-16)
+
+
+### Features
+
+* add . highlight and property highlight ([4cf35bd](https://github.com/MuntasirSZN/sublime-tera-syntax/commit/4cf35bd2f1b78ea3e94e2468632b15ee588d4780))
+
 ## [2.0.0](https://github.com/MuntasirSZN/sublime-tera/compare/v1.2.2...v2.0.0) (2025-04-14)
 
 
