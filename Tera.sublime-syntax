@@ -106,7 +106,7 @@ contexts:
         2: entity.name.function.tera
 
   function:
-    - match: '\b\w*(?=::)?(\w+)\s*\('
+    - match: '\b(?:(\w+)::)?(\w+)\s*\('
       captures:
         1: entity.name.namespace.tera
         2: entity.name.function.tera
