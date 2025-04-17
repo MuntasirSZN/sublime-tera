@@ -20,24 +20,24 @@ contexts:
     
     - match: '({{)-?'
       captures:
-        1: punctuation.definition.tera
+        1: punctuation.section.group.begin.tera
       push:
         - meta_scope: meta.scope.tera.expression
         - match: '-?(}})'
           captures:
-            1: punctuation.definition.tera
+            1: punctuation.section.group.end.tera
           pop: true
         - include: expression
     
     - match: '({%)-?\s*(if|elif|for|filter|macro|set|set_global|include|import|extends)\s+'
       captures:
-        1: punctuation.definition.tera
+        1: punctuation.section.block.begin.tera
         2: keyword.control.tera
       push:
         - meta_scope: meta.scope.tera.tag
         - match: '-?(%})'
           captures:
-            1: punctuation.definition.tera
+            1: punctuation.section.block.end.tera
           pop: true
         - include: expression
     
