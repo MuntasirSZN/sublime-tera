@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.1.2](https://github.com/MuntasirSZN/sublime-tera/compare/v2.1.1...v2.1.2) (2025-04-17)
+
+
+### Bug Fixes
+
+* correctly match function identifiers and optional namespaces ([#13](https://github.com/MuntasirSZN/sublime-tera/issues/13)) ([981be46](https://github.com/MuntasirSZN/sublime-tera/commit/981be46db4c2a1562815caf891c30b0e1f2cc322))
+* use `variable.other.member` scope for property accessor identifiers ([#10](https://github.com/MuntasirSZN/sublime-tera/issues/10)) ([40fd914](https://github.com/MuntasirSZN/sublime-tera/commit/40fd914eb91ad4012e5e4a308787adeb40c8e6d5))
+* use keyword.operator.word for in/and/or/not/is/as operators ([#14](https://github.com/MuntasirSZN/sublime-tera/issues/14)) ([14a7f3e](https://github.com/MuntasirSZN/sublime-tera/commit/14a7f3eee95d0734e9d00ced1b662551e0e9547f))
+* use punctuation.section and punctuation.block over punctuation.definition ([#15](https://github.com/MuntasirSZN/sublime-tera/issues/15)) ([2a502f9](https://github.com/MuntasirSZN/sublime-tera/commit/2a502f9d98711ddca4ad2b685afaa121e42ec483))
+
 ## [2.1.1](https://github.com/MuntasirSZN/sublime-tera/compare/v2.1.0...v2.1.1) (2025-04-16)
 
 
