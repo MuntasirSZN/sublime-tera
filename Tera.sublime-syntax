@@ -70,7 +70,7 @@ contexts:
         2: keyword.control.tera
         3: punctuation.definition.tera
       push:
-        - meta_scope: comment.block.tera.raw
+        - meta_scope: markup.raw.block.tera
         - match: '({%)-?\s*(endraw)\s*(%})'
           captures:
             1: punctuation.definition.tera
