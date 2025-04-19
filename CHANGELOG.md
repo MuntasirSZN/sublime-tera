@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/MuntasirSZN/sublime-tera/compare/v1.0.0...v1.0.1) (2025-04-19)
+
+
+### Bug Fixes
+
+* include whitespace trim in captures, use `punctuation.section.block` ([#17](https://github.com/MuntasirSZN/sublime-tera/issues/17)) ([8d7d7e4](https://github.com/MuntasirSZN/sublime-tera/commit/8d7d7e4cf6b5774841aa1e8220523bb0f8cc437e))
+* use `markup.raw.block` instead of `comment.block.tera.raw` ([#18](https://github.com/MuntasirSZN/sublime-tera/issues/18)) ([afe23fc](https://github.com/MuntasirSZN/sublime-tera/commit/afe23fc18519f89395a5f8a1eb6d516a92bd5b80))
+
 ## 1.0.0 (2025-04-17)
 
 
