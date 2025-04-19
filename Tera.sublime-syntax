@@ -18,64 +18,64 @@ contexts:
             0: punctuation.definition.comment.tera
           pop: true
     
-    - match: '({{)-?'
+    - match: '({{-?)'
       captures:
         1: punctuation.section.group.begin.tera
       push:
         - meta_scope: meta.scope.tera.expression
-        - match: '-?(}})'
+        - match: '(-?}})'
           captures:
             1: punctuation.section.group.end.tera
           pop: true
         - include: expression
     
-    - match: '({%)-?\s*(if|elif|for|filter|macro|set|set_global|include|import|extends)\s+'
+    - match: '({%-?)\s*(if|elif|for|filter|macro|set|set_global|include|import|extends)\s+'
       captures:
         1: punctuation.section.block.begin.tera
         2: keyword.control.tera
       push:
         - meta_scope: meta.scope.tera.tag
-        - match: '-?(%})'
+        - match: '(-?%})'
           captures:
             1: punctuation.section.block.end.tera
           pop: true
         - include: expression
     
-    - match: '({%)-?\s*(block|endblock|filter|endfilter|endmacro)\s+'
+    - match: '({%-?)\s*(block|endblock|filter|endfilter|endmacro)\s+'
       captures:
-        1: punctuation.definition.tera
+        1: punctuation.section.block.begin.tera
         2: keyword.control.tera
       push:
         - meta_scope: meta.scope.tera.tag
-        - match: '-?(%})'
+        - match: '(-?%})'
           captures:
-            1: punctuation.definition.tera
+            1: punctuation.section.block.end.tera
           pop: true
         - include: identifier
     
-    - match: '({%)-?\s*(else|elif|endif|endfor|continue|break|endblock|endfilter|endmacro)\s*'
+    - match: '({%-?)\s*(else|elif|endif|endfor|continue|break|endblock|endfilter|endmacro)\s*'
       captures:
-        1: punctuation.definition.tera
+        1: punctuation.section.block.begin.tera
         2: keyword.control.tera
       push:
         - meta_scope: meta.scope.tera.tag
-        - match: '-?(%})'
+        - match: '(-?%})'
           captures:
-            1: punctuation.definition.tera
+            1: punctuation.section.block.end.tera
           pop: true
     
-    - match: '({%)-?\s*(raw)\s*(%})'
+    - match: '({%-?)\s*(raw)\s*(-?%})'
       captures:
-        1: punctuation.definition.tera
+        1: punctuation.section.block.begin.tera
         2: keyword.control.tera
-        3: punctuation.definition.tera
+        3: punctuation.section.block.end.tera
       push:
         - meta_scope: markup.raw.block.tera
-        - match: '({%)-?\s*(endraw)\s*(%})'
+        - match: '({%-?)\s*(endraw)\s*(-?%})'
           captures:
-            1: punctuation.definition.tera
+            1: punctuation.section.block.begin.tera
             2: keyword.control.tera
-            3: punctuation.definition.tera
+            3: punctuation.section.block.end.tera
           pop: true
     
     - include: scope:text.html.basic
