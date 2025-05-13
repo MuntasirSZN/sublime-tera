@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/MuntasirSZN/sublime-tera/compare/v1.0.1...v1.1.0) (2025-05-13)
+
+
+### Features
+
+* added to package control ([25857be](https://github.com/MuntasirSZN/sublime-tera/commit/25857be13bf5f4ef4d849d344bdfa048ea31b8d3))
+
 ## [1.0.1](https://github.com/MuntasirSZN/sublime-tera/compare/v1.0.0...v1.0.1) (2025-04-19)
 
 
