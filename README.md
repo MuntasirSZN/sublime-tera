@@ -18,9 +18,6 @@ Sublime Text package for the [Tera](https://keats.github.io/tera/) templating la
 
 ### Package Control
 
-> [!NOTE]
-> This package is **not** yet available in Package Control.
-
 1. Open the command palette (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> or <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>).
 2. Enter `Package Control: Install Package`.
 3. Searching for and installing the `Tera` package.
